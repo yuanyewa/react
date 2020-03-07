@@ -11,11 +11,24 @@ function App() {
   function nameChangeHandler(event) {
     setMystate({username: event.target.value});
   }
+  const [myshow, setMyshow] = useState({
+    showOut : true
+  });
+  function toggleShowout() {
+    setMyshow({showOut: !myshow.showOut})
+  }
+  let person = null;
+  if (myshow.showOut) {
+    person = (
+      <UserOutput username={mystate.username}/>
+    );
+  }
   return (
     <div className="App">
       <header className="App-header">
         <UserInput changed={nameChangeHandler} value={mystate.username}/>
-        <UserOutput username={mystate.username}/>
+        <button onClick={toggleShowout} />
+        {person}
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
